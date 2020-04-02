@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
 GT Raashan Info - Login
 {% endblock %}
 
 {% block header_extras %}
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<link rel="stylesheet" href="{% static 'custom/css/social-buttons.css' %}" >
 {% endblock %}
 
 {% block body_start %}
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=599955617271566&autoLogAppEvents=1"></script>
+<!-- <meta name="google-signin-client_id" content=""> -->
 {% endblock %}
 
 {% block content %}
@@ -16,10 +20,12 @@ GT Raashan Info - Login
         <form id="login-form" method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <a href="{% url 'social:begin' 'facebook' %}">
-                Continue with Facebook
+            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-social btn-facebook">
+                <i class="fab fa-facebook-f"></i> Continue with Facebook
             </a>
-            <br>
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-block btn-social btn-google">
+                <i class="fab fa-google"></i> Continue with Google
+            </a>
             <br>
             <div class="strike">
                 <span>OR</span>
