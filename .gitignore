@@ -1,0 +1,8 @@
+*.pyc
+.vscode/settings.json
+.vscode/.ropeproject
+raashan_site/db.sqlite3
+*.zip
+raashan_site/static/*
+*.env
+.venv/*

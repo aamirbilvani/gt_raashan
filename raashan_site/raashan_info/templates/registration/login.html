@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+GT Raashan Info - Login
+{% endblock %}
+
+{% block header_extras %}
+{% endblock %}
+
+{% block body_start %}
+{% endblock %}
+
+{% block content %}
+    <div class="form-signin">
+        <form id="login-form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <br>
+            <br>
+            <div class="strike">
+                <span>OR</span>
+            </div>
+            <br>
+            <label for="id_username" class="sr-only">Username</label>
+            <input id="id_username" name="username" type="text" class="form-control" placeholder="Username" required autofocus>
+            <label for="id_password" class="sr-only">Password</label>
+            <input id="id_password" name="password" type="password" class="form-control" placeholder="Password" required>
+            {% if form.errors %}
+                <p class="label label-danger">
+                    Your username and password didn't match. 
+                    Please try again.
+                </p>
+            {% endif %}
+
+            <input type="submit" value="Login" class="btn bt-lg btn-primary btn-block" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+    </div>
+{% endblock %}

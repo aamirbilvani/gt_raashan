@@ -1,0 +1,143 @@
+html,
+/* body {
+  height: 100%;  
+}
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #ffffff;
+} */
+
+/* .main */
+main > .container {
+  padding: 60px 15px 0;
+}
+
+.footer {
+  background-color: #f5f5f5;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.navbar .back-button{
+  flex: 1;
+  justify-content: flex-start;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+} 
+
+.navbar .back-button .button {
+  color: #ffffff;
+  font-size: 1rem;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.navbar .logo{
+  flex: 1;
+  justify-content: center;
+  align-self: flex-start;
+}
+
+.navbar .menu{
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.container {
+  align-self: flex-start;
+  margin-top: 1.6em;
+}
+
+.container-wide {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+hr {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+input.currency {
+  text-align: right;
+  padding-right: 15px;
+}
+.input-group .form-control {
+  float: none;
+}
+
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap; 
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+}
+
+.strike > span {
+  position: relative;
+  display: inline-block;
+}
+
+.strike > span:before,
+.strike > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: rgb(0,0,0,0.2);
+}
+
+.strike > span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.strike > span:after {
+  left: 100%;
+  margin-left: 15px;
+}

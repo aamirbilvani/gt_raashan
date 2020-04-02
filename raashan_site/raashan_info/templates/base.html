@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        {% block header_extras %}
+        {% endblock %}
+
+        <link rel="stylesheet" href="{% static 'custom/css/styles.css' %}" >
+
+    </head>
+    <body class='d-flex flex-column h-100'>
+        {% block body_start %}
+        {% endblock %}
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <div class="back-button text-left">
+                    {% block back_button %}
+                        <a class="button" href="{{ back_url }}">
+                            <i class="fas fa-angle-left"></i>
+                            Back
+                        </a>
+                    {% endblock %}
+                </div>
+                <div class="logo text-center">
+                    <a class="navbar-brand" href="/">GT Raashan Info</a>
+                </div>
+                <div class="menu text-right">
+
+                    {% if user.is_authenticated %}
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <span class="navbar-text">
+                                    Hi {{ user.username|capfirst }}
+                                </span>
+                                <li class="nav-item">
+                                    <a class="nav-link" href='{% url 'logout' %}'>Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+        <main role="main" class="flex-shrink-0">
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer class="footer mt-auto py-1">
+            <div class="container text-center">
+                <span class="text-muted">Copyright &copy; {% now "Y" %}</span>
+            </div>
+        </footer>
+        {% block body_end %}
+        {% endblock %}
+    </body>
+</html>
