@@ -11,6 +11,7 @@ rope = "*"
 django = "*"
 django-widget-tweaks = "*"
 python-dotenv = "*"
+social-auth-app-django = "*"
 
 [requires]
 python_version = "3.8"

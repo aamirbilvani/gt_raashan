@@ -7,6 +7,8 @@ GT Raashan Info - Login
 {% endblock %}
 
 {% block body_start %}
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=599955617271566&autoLogAppEvents=1"></script>
 {% endblock %}
 
 {% block content %}
@@ -14,6 +16,9 @@ GT Raashan Info - Login
         <form id="login-form" method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <a href="{% url 'social:begin' 'facebook' %}">
+                Continue with Facebook
+            </a>
             <br>
             <br>
             <div class="strike">
