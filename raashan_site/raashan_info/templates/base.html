@@ -46,7 +46,11 @@
                         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <span class="navbar-text">
-                                    Hi {{ user.username|capfirst }}
+                                    {% if user.first_name %}
+                                        Hi {{ user.first_name|capfirst }}
+                                    {% else %}
+                                        Hi {{ user.username|capfirst }}
+                                    {% endif %}
                                 </span>
                                 <li class="nav-item">
                                     <a class="nav-link" href='{% url 'logout' %}'>Logout</a>

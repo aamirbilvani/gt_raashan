@@ -12,6 +12,7 @@ django = "*"
 django-widget-tweaks = "*"
 python-dotenv = "*"
 social-auth-app-django = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.8"

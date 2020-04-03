@@ -19,12 +19,26 @@ class Organization(models.Model):
 class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
+    def get_worker(self):
+        if hasattr(self, 'worker'):
+            return self.worker
+        return None
+
+    def __str__(self):
+        if self.first_name and self.last_name:
+            return "{} {}".format(self.first_name, self.last_name)
+        else:
+            return self.username
+
 
 
 class Worker(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=False)
     organization = models.ForeignKey(Organization, null=True, on_delete=models.SET_NULL)
     is_admin = models.BooleanField('Is Admin')
+
+    def __str__(self):
+        return str(self.user)
 
 
 

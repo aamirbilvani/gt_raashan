@@ -1,7 +1,9 @@
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', login_required(views.IndexView.as_view())),
+    path('worker', login_required(views.WorkerView.as_view())),
 ]

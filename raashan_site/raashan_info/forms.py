@@ -1,6 +1,6 @@
-from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Worker
 
 class CustomUserCreationForm(UserCreationForm):
     def clean(self):
@@ -14,8 +14,16 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ('username', 'email')
 
-class CustomUserChangeForm(UserChangeForm):
 
+
+class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = UserChangeForm.Meta.fields
+
+
+
+class WorkerForm(ModelForm):
+    class Meta:
+        model = Worker
+        fields = ['user', 'organization']

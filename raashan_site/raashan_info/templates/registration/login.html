@@ -15,16 +15,21 @@ GT Raashan Info - Login
 <!-- <meta name="google-signin-client_id" content=""> -->
 {% endblock %}
 
+{% block back_button %}
+{% endblock %}
+
 {% block content %}
     <div class="form-signin">
         <form id="login-form" method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-social btn-facebook">
-                <i class="fab fa-facebook-f"></i> Continue with Facebook
+                <i class="fab fa-facebook-f"></i> 
+                Sign in with Facebook
             </a>
             <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-block btn-social btn-google">
-                <i class="fab fa-google"></i> Continue with Google
+                <i class="fab fa-google"></i> 
+                Sign in with Google
             </a>
             <br>
             <div class="strike">
