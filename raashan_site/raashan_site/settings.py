@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'widget_tweaks',
     'social_django',
+    'rest_framework',
 
     'raashan_info',
 ]
@@ -187,3 +188,9 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
