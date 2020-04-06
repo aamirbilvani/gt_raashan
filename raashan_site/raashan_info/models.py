@@ -44,7 +44,7 @@ class Worker(models.Model):
 
 class Recipient(models.Model):
     name = models.CharField('Recipient Name', max_length=100)
-    cnic = models.CharField('CNIC', max_length=13)
+    cnic = models.CharField('CNIC', db_index=True, max_length=13)
 
     def __str__(self):
         return self.name + ": {0}-{1}-{2}".format(self.cnic[0:5], self.cnic[5:12], self.cnic[12])

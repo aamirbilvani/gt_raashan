@@ -1,13 +1,73 @@
 {% extends 'base.html' %}
-{% block title %}
-GT Raashan Info - Home
+{% load static %}
+
+{% block header_extras %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+{% endblock %}
+
+
+{% block back_button %}
 {% endblock %}
 
 {% block content %}   
     <div class="container">
-        
+        <form class="recipient-form needs-validation" method="POST" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="name">Recipient Name</label>
+                <div class="col-sm-10">
+                    <input type="text" required id="name" name="name" class="form-control" placeholder="Enter Recipient's Name">
+                    <div class="invalid-feedback">
+                        Please enter recipient's name.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="cnic">CNIC</label>
+                <div class="col-sm-10">
+                    <input type="number" required id="cnic" name="cnic" class="form-control" min="1000000000000" max="9999999999999" maxlength="13" placeholder="Enter Recipient's CNIC (no dashes)">
+                    <div class="invalid-feedback">
+                        Please enter recipient's CNIC (13 digits only).
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-left">
+                    <button id="checkCNIC" type="button" class="btn btn-block btn-primary" value="Check CNIC">
+                        Check CNIC
+                    </button>
+                </div>
+                <div class="col text-right">
+                    <input type="submit" class="btn btn-block btn-success" value="Save"/> 
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="recipientModal" tabindex="-1" role="dialog" aria-labelledby="recipientModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="recipientModalLabel">Recipient Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="recipientModalContent">Recipient Content</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
     </div>
 {% endblock %}
 
-{% block back_button %}
+{% block body_end %}
+    <script src="{% static 'custom/js/recipient.js' %}"></script>
 {% endblock %}

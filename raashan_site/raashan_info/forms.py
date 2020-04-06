@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, Worker
 
@@ -23,7 +23,12 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 
-class WorkerForm(ModelForm):
+class RecipientForm(forms.Form):
+    name = forms.CharField()
+    cnic = forms.CharField(widget=forms.NumberInput)
+
+
+class WorkerForm(forms.ModelForm):
     class Meta:
         model = Worker
         fields = ['user', 'organization']
