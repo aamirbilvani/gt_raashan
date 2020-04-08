@@ -1,11 +1,12 @@
 from django.views.generic import FormView, CreateView
 from django.shortcuts import redirect
+from django.contrib.auth import login, authenticate
 from rest_framework import viewsets
 from datetime import datetime
 
 from .models import *
 from .serializers import *
-from .forms import RecipientForm
+from .forms import RecipientForm, CustomUserCreationForm
 
 
 class IndexView(FormView):
@@ -44,6 +45,32 @@ class IndexView(FormView):
 
         return super().form_valid(form)
 
+
+
+class SignupView(FormView):
+    template_name = 'registration/signup.html'
+    form_class = CustomUserCreationForm
+    success_url = '/'
+
+    # if form validation succeeds, create the user object, then login the user
+    # Additionally, create a worker for the user.
+    def form_valid(self, form):
+        form.save()
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password1')
+        organization = form.cleaned_data.get('organization')
+        user = authenticate(username=username, password=raw_password)
+        login(self.request, user)
+
+        worker = Worker(user_id=user.id, organization_id=organization, is_admin=False)
+        worker.save()
+
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(SignupView, self).get_context_data(**kwargs)
+        context['back_url'] = 'login'
+        return context
 
 
 class WorkerView(CreateView):

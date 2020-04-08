@@ -20,9 +20,9 @@ GT Raashan Info - Login
 
 {% block content %}
     <div class="form-signin">
-        <form id="login-form" method="post" action="{% url 'login' %}">
+        <form id="login-form" method="post" class="needs-validation {% if form.errors %} was-validated {% endif %}">
             {% csrf_token %}
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <div class="h3 mb-3 font-weight-normal">Please sign in</div>
             <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-social btn-facebook">
                 <i class="fab fa-facebook-f"></i> 
                 Sign in with Facebook
@@ -36,19 +36,37 @@ GT Raashan Info - Login
                 <span>OR</span>
             </div>
             <br>
-            <label for="id_username" class="sr-only">Username</label>
-            <input id="id_username" name="username" type="text" class="form-control" placeholder="Username" required autofocus>
-            <label for="id_password" class="sr-only">Password</label>
-            <input id="id_password" name="password" type="password" class="form-control" placeholder="Password" required>
-            {% if form.errors %}
-                <p class="label label-danger">
-                    Your username and password didn't match. 
-                    Please try again.
-                </p>
-            {% endif %}
-
-            <input type="submit" value="Login" class="btn bt-lg btn-primary btn-block" />
-            <input type="hidden" name="next" value="{{ next }}" />
+            <div class="form-group row">
+                <div class="col">
+                    <label for="id_username" class="sr-only">Username</label>
+                    <input id="id_username" name="username" type="text" class="form-control" placeholder="Username" required autofocus>
+                    <label for="id_password" class="sr-only">Password</label>
+                    <input id="id_password" name="password" type="password" class="form-control" placeholder="Password" required>
+                    {% if form.errors %}
+                        <div class="invalid-feedback">
+                            Your username and password didn't match. 
+                            Please try again.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit" value="Login" class="btn btn-primary btn-block" />
+                    <input type="hidden" name="next" value="{{ next }}" />
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <div class="h5 mb-3 font-weight-normal">Don't have an account? Sign up!</div>
+                    <a href="/signup" class="btn btn-primary btn-block">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
         </form>
     </div>
 {% endblock %}

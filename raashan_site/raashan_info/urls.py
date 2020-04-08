@@ -13,6 +13,7 @@ router.register('received', views.ReceivedViewSet)
 
 urlpatterns = [
     path('', login_required(views.IndexView.as_view())),
+    path('signup', views.SignupView.as_view()),
     path('worker', login_required(views.WorkerView.as_view())),
     path('api/', include(router.urls))
 ]
