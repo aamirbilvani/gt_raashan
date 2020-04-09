@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, Worker, Organization
+from django.db.utils import OperationalError
 
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
@@ -8,15 +9,20 @@ class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Enter a valid email address.')
 
     # Get the organization values from the DB to populate into the select box
-    organizations = Organization.objects.all()
-    organization_choices = []
-    for org in organizations:
-        organization_choices.append((org.id, org.name))
+    try:
+        organizations = Organization.objects.all()
+        organization_choices = []
+        for org in organizations:
+            organization_choices.append((org.id, org.name))
 
-    organization = forms.ChoiceField(
-        required=False,
-        choices=organization_choices,
-    )
+        organization = forms.ChoiceField(
+            required=False,
+            choices=organization_choices,
+        )
+    except OperationalError:
+        # this happens when DB doesn't yet exist
+        pass
+
 
     def clean(self):
         cleaned_data = super(CustomUserCreationForm, self).clean()
