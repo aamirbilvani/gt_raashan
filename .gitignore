@@ -6,3 +6,5 @@ raashan_site/db.sqlite3
 raashan_site/static/*
 *.env
 .venv/*
+uwsgi-conf/*
+nginx-conf/*

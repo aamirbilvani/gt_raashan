@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     '18.140.109.227',
+    'gt-raashan.info',
 ]
 
 
