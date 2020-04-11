@@ -112,6 +112,21 @@ function qrCodeScannerStart(cameraId) {
 
 // Show the scanner modal
 $('#scannerModalShowButton').on('click', function() {
+    // start the selected camera, then show the modal
+    var cameraId = $('#selectCamera').val();
+    qrCodeScannerStart(cameraId);
+    $('#scannerModal').modal('show');
+})
+
+// on modal hide, stop the camera and destroy the dropdown entries to ensure cleanup.
+$('#scannerModal').on('hide.bs.modal', function(e) {
+    if (qrCodeScanner) {
+        qrCodeScanner.stop().then(ignore => {
+        });
+    }
+});
+
+$(document).ready(function() {
     // First get the list of cameras
     Html5Qrcode.getCameras().then(cameras => {
         // If cameras are found, populate the dropdown
@@ -121,9 +136,13 @@ $('#scannerModalShowButton').on('click', function() {
                 var value = camera.id;
                 var name = camera.label == null ? value : camera.label;
                 if (i == 0) {
+                    $("#selectCamera").append(`<option value="${value}" selected>${name}</option>`);
+                }
+                else {
                     $("#selectCamera").append(`<option value="${value}">${name}</option>`);
                 }
             }
+
             // set the on change event of the dropdown to stop the current camera and start the next camera
             $('#selectCamera').on('change', function() {
                 qrCodeScanner.stop().then(ignore => {
@@ -132,24 +151,10 @@ $('#scannerModalShowButton').on('click', function() {
                 })
             });
 
-            // start the first camera
-            firstCameraId = $('#selectCamera').val();
-            qrCodeScannerStart(firstCameraId);
+            // show the button that pops open the modal
+            $('.scanner-modal-button-row').show();
         } else {
             $('#scannerFeedback').text('No cameras found on this device.');
         }
-
     })
-    $('#scannerModal').modal('show');
-})
-
-// on modal hide, stop the camera and destroy the dropdown entries to ensure cleanup.
-$('#scannerModal').on('hide.bs.modal', function(e) {
-    if (qrCodeScanner) {
-        qrCodeScanner.stop().then(ignore => {
-            $('#selectCamera').off('change')
-            $("#selectCamera").html('');
-        })
-    }
 });
-

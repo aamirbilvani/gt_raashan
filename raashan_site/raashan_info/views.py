@@ -1,7 +1,9 @@
 from django.views.generic import FormView, CreateView
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
-from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet, GenericViewSet
+from rest_framework.permissions import BasePermission, IsAdminUser, IsAuthenticated
+from rest_framework import mixins
 from datetime import datetime
 
 from .models import *
@@ -90,25 +92,30 @@ class WorkerView(CreateView):
 
 
 
-class WorkerViewSet(viewsets.ModelViewSet):
+class WorkerViewSet(ReadOnlyModelViewSet):
     queryset = Worker.objects.all().order_by('id')
     serializer_class = WorkerSerializer
+    permission_classes = [IsAdminUser]
 
 
 
-class CustomUserViewSet(viewsets.ModelViewSet):
+class CustomUserViewSet(ReadOnlyModelViewSet):
     queryset = CustomUser.objects.all().order_by('id')
     serializer_class = CustomUserSerializer
+    permission_classes = [IsAdminUser]
 
 
 
-class OrganizationViewSet(viewsets.ModelViewSet):
+class OrganizationViewSet(GenericViewSet, 
+                          mixins.CreateModelMixin,
+                          mixins.ListModelMixin,
+                          mixins.RetrieveModelMixin):
     queryset = Organization.objects.all().order_by('id')
     serializer_class = OrganizationSerializer
 
 
 
-class ReceivedViewSet(viewsets.ModelViewSet):
+class ReceivedViewSet(ReadOnlyModelViewSet):
     queryset = Received.objects.all().order_by('-date')
     serializer_class = ReceivedSerializer
 
@@ -126,6 +133,7 @@ class ReceivedViewSet(viewsets.ModelViewSet):
 
 
 
-class RecipientViewSet(viewsets.ModelViewSet):
+class RecipientViewSet(ReadOnlyModelViewSet):
     queryset = Recipient.objects.all().order_by('id')
     serializer_class = RecipientSerializer
+    permission_classes = [IsAdminUser]
