@@ -103,7 +103,7 @@ const videoErrorCallback = message => {
 function qrCodeScannerStart(cameraId) {
     qrCodeScanner.start(
         cameraId, 
-        {fps: 10},
+        { fps: 10 },
         qrCodeSuccessCallback,
         qrCodeErrorCallback)
         .catch(videoErrorCallback);
@@ -114,8 +114,10 @@ function qrCodeScannerStart(cameraId) {
 $('#scannerModalShowButton').on('click', function() {
     // start the selected camera, then show the modal
     var cameraId = $('#selectCamera').val();
-    qrCodeScannerStart(cameraId);
     $('#scannerModal').modal('show');
+    setTimeout(function() {
+        qrCodeScannerStart(cameraId);
+    }, 500);
 })
 
 // on modal hide, stop the camera and destroy the dropdown entries to ensure cleanup.
